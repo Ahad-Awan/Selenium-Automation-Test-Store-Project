@@ -1,0 +1,25 @@
+{
+  "name": "selenium-task4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=index",
+    "test1": "mocha tests/scenario.test.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=scenario2",
+    "test2": "mocha tests/scenario2.test.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=scenario2",
+    "test3": "mocha tests/scenario3.test.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=scenario2",
+    "test4": "mocha tests/scenario4.test.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=scenario2",
+    "bdd": "cucumber-js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@cucumber/cucumber": "^12.1.0",
+    "chai": "^5.2.1",
+    "mocha": "^11.7.1",
+    "mochawesome": "^7.1.3",
+    "selenium-webdriver": "^4.34.0"
+  }
+}

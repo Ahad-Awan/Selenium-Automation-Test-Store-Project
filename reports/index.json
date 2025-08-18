@@ -1,0 +1,222 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-08-12T05:30:03.764Z",
+    "end": "2025-08-12T05:31:25.857Z",
+    "duration": 82093,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f28e713e-7705-4f82-81ea-3ee507cc4e49",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5d4777bc-ea06-4c97-964b-ce4a7b3a5040",
+          "title": "Task 4 - Automation Test Store",
+          "fullFile": "C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario.test.js",
+          "file": "\\tests\\scenario.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Task 4 - Automation Test Store\"",
+              "fullTitle": "Task 4 - Automation Test Store \"before all\" hook in \"Task 4 - Automation Test Store\"",
+              "timedOut": false,
+              "duration": 3380,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await createDriver();\nloginPage = new LoginPage(driver);",
+              "err": {},
+              "uuid": "ed8e4fea-5ec7-4d45-8512-ff4a1f371a40",
+              "parentUUID": "5d4777bc-ea06-4c97-964b-ce4a7b3a5040",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Task 4 - Automation Test Store\"",
+              "fullTitle": "Task 4 - Automation Test Store \"after all\" hook in \"Task 4 - Automation Test Store\"",
+              "timedOut": false,
+              "duration": 810,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "41157ef5-21f7-4f3f-b52d-c6bcb5e24526",
+              "parentUUID": "5d4777bc-ea06-4c97-964b-ce4a7b3a5040",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Scenario 1: Login, select Dove newest item, add to cart, verify",
+              "fullTitle": "Task 4 - Automation Test Store Scenario 1: Login, select Dove newest item, add to cart, verify",
+              "timedOut": false,
+              "duration": 29166,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await loginPage.open();\nawait loginPage.clickLoginLink();\nawait loginPage.login(config.username, config.password);\nawait driver.sleep(2000);\nconst homeLink = await driver.findElement(By.xpath(\"//a[text()='Home']\"));\nawait homeLink.click();\nawait driver.sleep(2000);\nawait driver.executeScript(`\n  window.scrollTo({\n      top: document.body.scrollHeight,\n      behavior: 'smooth'\n  });\n`);\nawait driver.sleep(2000);\nconst doveImage = await driver.wait(\n  until.elementIsVisible(\n    await driver.wait(\n      until.elementLocated(\n        By.xpath(\n          \"//ul[@id='brandcarousal']//img[contains(@alt, 'Dove') or contains(@src, 'dove')]\"\n        )\n      ),\n      10000\n    )\n  ),\n  10000\n);\nawait doveImage.click();\nawait driver.sleep(2000);\nconst sortDropdown = await driver.wait(\n  until.elementLocated(By.id(\"sort\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(sortDropdown), 10000);\nawait sortDropdown.click();\nawait driver.sleep(500);\nconst dateNewOption = await driver.wait(\n  until.elementLocated(By.xpath(\"//option[text()='Date New > Old']\")),\n  10000\n);\nawait dateNewOption.click();\nawait driver.executeScript(`\n  window.scrollBy({ top: 300, behavior: 'smooth' });\n`);\nawait driver.sleep(1500);\nconst firstItem = await driver.wait(\n  until.elementLocated(\n    By.xpath(\"(//a[@class='productcart' and @title='Add to Cart'])[1]\")\n  ),\n  10000\n);\nawait driver.wait(until.elementIsVisible(firstItem), 10000);\nawait firstItem.click();\nawait driver.sleep(2000);\nconst cartLink = await driver.wait(\n  until.elementLocated(\n    By.xpath(\"//ul[@id='main_menu_top']//a[contains(@href, 'cart')]/span\")\n  ),\n  10000\n);\nawait cartLink.click();\nawait driver.sleep(2000);",
+              "err": {},
+              "uuid": "aeca2073-07bf-4011-8365-73db69e174e0",
+              "parentUUID": "5d4777bc-ea06-4c97-964b-ce4a7b3a5040",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "aeca2073-07bf-4011-8365-73db69e174e0"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 29166,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 45000
+        },
+        {
+          "uuid": "cbf057dd-c482-4395-9b76-69bce3287c98",
+          "title": "Task 4 - Automation Test Store",
+          "fullFile": "C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario2.test.js",
+          "file": "\\tests\\scenario2.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Task 4 - Automation Test Store\"",
+              "fullTitle": "Task 4 - Automation Test Store \"before all\" hook in \"Task 4 - Automation Test Store\"",
+              "timedOut": false,
+              "duration": 1957,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await createDriver();\nloginPage = new LoginPage(driver);",
+              "err": {},
+              "uuid": "00af82ad-3bad-44b4-82ce-8643b333d971",
+              "parentUUID": "cbf057dd-c482-4395-9b76-69bce3287c98",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Task 4 - Automation Test Store\"",
+              "fullTitle": "Task 4 - Automation Test Store \"after all\" hook in \"Task 4 - Automation Test Store\"",
+              "timedOut": false,
+              "duration": 1746,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "64e8ade3-cb10-4a76-9e14-25ad28897cbe",
+              "parentUUID": "cbf057dd-c482-4395-9b76-69bce3287c98",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Scenario 2: Add products from Tshirts and Shoes with correct qty and size, then verify cart",
+              "fullTitle": "Task 4 - Automation Test Store Scenario 2: Add products from Tshirts and Shoes with correct qty and size, then verify cart",
+              "timedOut": true,
+              "duration": 45002,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "await loginPage.open();\nawait loginPage.clickLoginLink();\nawait loginPage.login(config.username, config.password);\nawait driver.sleep(2000);\nconst apparelLink = await driver.findElement(\n  By.xpath(\n    \"//*[@id='categorymenu']//a[contains(text(), 'Apparel') and contains(text(), 'accessories')]\"\n  )\n);\nawait apparelLink.click();\nawait driver.sleep(1000);\nconst tshirtsLink = await driver.findElement(\n  By.xpath(\"//a[text()='T-shirts']\")\n);\nawait tshirtsLink.click();\nawait driver.sleep(2000);\nconst sortDropdown = await driver.wait(\n  until.elementLocated(By.id(\"sort\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(sortDropdown), 10000);\nawait sortDropdown.click();\nawait driver.sleep(500);\nconst priceNewOption = await driver.wait(\n  until.elementLocated(By.xpath(\"//option[text()='Price Low > High']\")),\n  10000\n);\nawait priceNewOption.click();\nawait driver.executeScript(`\n  window.scrollBy({ top: 300, behavior: 'smooth' });\n`);\nawait driver.sleep(1500);\nconst specificItem = await driver.wait(\n  until.elementLocated(By.xpath(\"//a[@data-id='121']\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(specificItem), 10000);\nawait specificItem.click();\nawait driver.sleep(1000);\nawait driver.executeScript(`\n  window.scrollBy({ top: 300, behavior: 'smooth' });\n`);\nawait driver.sleep(1500);\nconst addToCartBtn = await driver.wait(\n  until.elementLocated(By.xpath(\"//a[contains(@class, 'cart')]\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(addToCartBtn), 10000);\nawait addToCartBtn.click();\nawait driver.sleep(2000);\nconst apparel = await driver.findElement(\n  By.xpath(\n    \"//*[@id='categorymenu']//a[contains(text(), 'Apparel') and contains(text(), 'accessories')]\"\n  )\n);\nawait apparel.click();\nawait driver.sleep(1000);\nconst shoesLink = await driver.wait(\n  until.elementLocated(By.xpath(\"//a[text()='Shoes']\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(shoesLink), 10000);\nawait shoesLink.click();\nawait driver.sleep(2000);\nconst sortDropdownOpen = await driver.wait(\n  until.elementLocated(By.id(\"sort\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(sortDropdownOpen), 10000);\nawait sortDropdownOpen.click();\nawait driver.sleep(500);\nconst priceOption = await driver.wait(\n  until.elementLocated(By.xpath(\"//option[text()='Price High > Low']\")),\n  10000\n);\nawait priceOption.click();\nawait driver.executeScript(`\n  window.scrollBy({ top: 300, behavior: 'smooth' });\n`);\nawait driver.sleep(1500);\nconst addShoe = await driver.wait(\n  until.elementLocated(By.xpath(\"//a[@data-id='115']\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(addShoe), 10000);\nawait addShoe.click();\nawait driver.sleep(2000);\nawait driver.executeScript(`\n  window.scrollBy({ top: 300, behavior: 'smooth' });\n`);\nawait driver.sleep(100);\nconst quantityInput = await driver.wait(\n  until.elementLocated(By.id(\"product_quantity\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(quantityInput), 10000);\nawait quantityInput.clear();\nawait quantityInput.sendKeys(\"2\");\nawait driver.sleep(1000);\nconst addToCart = await driver.wait(\n  until.elementLocated(By.xpath(\"//a[contains(@class, 'cart')]\")),\n  10000\n);\nawait driver.wait(until.elementIsVisible(addToCart), 10000);\nawait addToCart.click();\nawait driver.sleep(4000);",
+              "err": {
+                "message": "Error: Timeout of 45000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario2.test.js)",
+                "estack": "Error: Timeout of 45000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario2.test.js)\n    at listOnTimeout (node:internal/timers:588:17)\n    at process.processTimers (node:internal/timers:523:7)",
+                "diff": null
+              },
+              "uuid": "8b213c4c-84c2-4d34-ba8c-dd4177f67e0b",
+              "parentUUID": "cbf057dd-c482-4395-9b76-69bce3287c98",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "8b213c4c-84c2-4d34-ba8c-dd4177f67e0b"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 45002,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 45000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 45000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "index",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "index"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
