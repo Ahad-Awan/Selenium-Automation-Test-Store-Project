@@ -1,7 +1,7 @@
 {
   "name": "selenium-task4",
   "version": "1.0.0",
-  "description": "hey test",
+  "description": "hey test 1",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/*.js --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=index",
