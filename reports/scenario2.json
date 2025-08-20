@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-08-13T05:12:42.509Z",
-    "end": "2025-08-13T05:13:03.522Z",
-    "duration": 21013,
+    "start": "2025-08-18T12:57:01.632Z",
+    "end": "2025-08-18T12:57:22.953Z",
+    "duration": 21321,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "111e0ca3-3b1b-45ca-b0aa-964212acee9b",
+      "uuid": "1b843e96-86d0-4716-a485-3a8c52fa9f6b",
       "title": "",
       "fullFile": "C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario4.test.js",
       "file": "\\tests\\scenario4.test.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ee50bd1b-b6b1-4c1f-a32a-cdcd6b5f0c12",
+          "uuid": "7a21ce30-3c05-45e9-ae3e-bbe1f687d5a1",
           "title": "Task 4 - Automation Test Store",
           "fullFile": "C:\\Users\\LENOV0\\Desktop\\automation-framework\\selenium-task4\\tests\\scenario4.test.js",
           "file": "\\tests\\scenario4.test.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook in \"Task 4 - Automation Test Store\"",
               "fullTitle": "Task 4 - Automation Test Store \"before all\" hook in \"Task 4 - Automation Test Store\"",
               "timedOut": false,
-              "duration": 5009,
+              "duration": 4318,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "driver = await createDriver();\nloginPage = new LoginPage(driver);",
               "err": {},
-              "uuid": "f19895e2-54ed-40d3-9d76-f740ede878a9",
-              "parentUUID": "ee50bd1b-b6b1-4c1f-a32a-cdcd6b5f0c12",
+              "uuid": "2230bd01-d33c-47d3-ac50-198efad1d06f",
+              "parentUUID": "7a21ce30-3c05-45e9-ae3e-bbe1f687d5a1",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after all\" hook in \"Task 4 - Automation Test Store\"",
               "fullTitle": "Task 4 - Automation Test Store \"after all\" hook in \"Task 4 - Automation Test Store\"",
               "timedOut": false,
-              "duration": 370,
+              "duration": 559,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "cfd1bbbb-2060-4c60-bf62-2e092bc92a08",
-              "parentUUID": "ee50bd1b-b6b1-4c1f-a32a-cdcd6b5f0c12",
+              "uuid": "a26444b1-2b1c-4ca5-919f-c4d3fb01caca",
+              "parentUUID": "7a21ce30-3c05-45e9-ae3e-bbe1f687d5a1",
               "isHook": true,
               "skipped": false
             }
@@ -76,7 +76,7 @@
               "title": "Scenario 4: Add products ending with 'M'",
               "fullTitle": "Task 4 - Automation Test Store Scenario 4: Add products ending with 'M'",
               "timedOut": false,
-              "duration": 15623,
+              "duration": 16432,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -85,20 +85,20 @@
               "context": null,
               "code": "await loginPage.open();\nawait loginPage.clickLoginLink();\nawait loginPage.login(config.username, config.password);\nconst homeLink = await driver.findElement(By.xpath(\"//a[text()='Home']\"));\nawait homeLink.click();\nawait driver.sleep(1500);\nconst menLink = await driver.findElement(\n  By.xpath('//*[@id=\"categorymenu\"]/nav/ul/li[6]/a')\n);\nawait menLink.click();\nawait driver.sleep(2000);\nawait driver.executeScript(`\n  window.scrollBy({ top: 500, behavior: 'smooth' });\n`);\nawait driver.sleep(1000);\nconst products = await driver.findElements(\n  By.xpath(\"//div[contains(@class,'thumbnails')]/div\")\n);\nlet foundMCount = 0;\nfor (let i = 0; i < products.length; i++) {\n  const productNameElem = await products[i].findElement(\n    By.xpath(\".//a[@class='prdocutname']\")\n  );\n  const productName = await productNameElem.getText();\n  if (productName.trim().endsWith(\"M\")) {\n    foundMCount++;\n    console.log(`Found product ending with 'M': \"${productName}\"`);\n    const outOfStockElems = await products[i].findElements(\n      By.xpath(\".//div[contains(@class, 'nostock')]\")\n    );\n    if (outOfStockElems.length > 0) {\n      console.log(`Status: OUT OF STOCK → Cannot add to cart\\n`);\n    } else {\n      const addToCartElems = await products[i].findElements(\n        By.xpath(\n          \".//a[contains(@class, 'productcart') or contains(@class,'cart')]\"\n        )\n      );\n      if (addToCartElems.length > 0) {\n        await driver\n          .actions({ bridge: true })\n          .move({ origin: products[i] })\n          .perform();\n        await driver.sleep(500);\n        await addToCartElems[0].click();\n        console.log(`✅ Status: Added to cart successfully\\n`);\n        await driver.sleep(1000);\n      } else {\n        console.log(`Status: OUT OF STOCK → Cannot add to cart\\n`);\n      }\n    }\n  }\n}\nif (foundMCount === 0) {\n  console.log(\"ℹ No products found ending with 'M'\");\n} else {\n  console.log(`Total products ending with 'M': ${foundMCount}`);\n}",
               "err": {},
-              "uuid": "8c2d6bf0-b4ae-4b8d-9891-589d39323373",
-              "parentUUID": "ee50bd1b-b6b1-4c1f-a32a-cdcd6b5f0c12",
+              "uuid": "3e6a0f93-cf13-4d00-8538-c6d0c401a8a3",
+              "parentUUID": "7a21ce30-3c05-45e9-ae3e-bbe1f687d5a1",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "8c2d6bf0-b4ae-4b8d-9891-589d39323373"
+            "3e6a0f93-cf13-4d00-8538-c6d0c401a8a3"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 15623,
+          "duration": 16432,
           "root": false,
           "rootEmpty": false,
           "_timeout": 60000
