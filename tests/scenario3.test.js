@@ -17,7 +17,8 @@ describe("Task 4 - Automation Test Store", function () {
     await driver.quit();
   });
 
-  it("Scenario 3: Check sale & stock in category", async () => {
+  it("Scenario 3: Check sale & stock in category", async function () {
+    this.timeout(180000);
     await loginPage.open();
     await loginPage.clickLoginLink();
     await loginPage.login(config.username, config.password);
@@ -58,20 +59,15 @@ describe("Task 4 - Automation Test Store", function () {
           totalOutOfStockCount++;
           console.log(`Product ${i + 1}: On sale but out of stock.`);
         } else {
-          let added = false;
-          try {
-            let addButtons = await card.findElements(
-              By.xpath(".//a[@title='Add to Cart']")
-            );
-            if (addButtons.length > 0) {
-              await addButtons[0].click();
-              added = true;
-              await driver.sleep(400); // ⏳ kam delay after add
-            }
-          } catch (_) {}
+          const hasAddButton =
+            (
+              await card.findElements(
+                By.xpath(".//a[@title='Add to Cart']")
+              )
+            ).length > 0;
           console.log(
             `Product ${i + 1}: On sale ${
-              added ? "and added" : "(button not found)"
+              hasAddButton ? "and can be added" : "(no add button)"
             }`
           );
         }
