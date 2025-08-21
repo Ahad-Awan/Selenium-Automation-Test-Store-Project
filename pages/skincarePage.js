@@ -1,36 +1,39 @@
-const { createDriver } = require("../utils/driver");
-const LoginPage = require("../pages/loginPage");
-const ProductListingPage = require("../pages/productListingPage");
-const config = require("../config/config");
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 
-describe("Task 4 - Automation Test Store", function () {
-  let driver, loginPage, productListingPage;
+class SkincarePage {
+  constructor(driver) {
+    this.driver = driver;
+  }
 
-  before(async () => {
-    driver = await createDriver();
-    loginPage = new LoginPage(driver);
-    productListingPage = new ProductListingPage(driver);
-  });
+  async waitForGrid() {
+    const gridLocator = By.xpath(
+      "//div[@class='thumbnails grid row list-inline']"
+    );
+    const grid = await this.driver.wait(
+      until.elementLocated(gridLocator),
+      10000
+    );
+    await this.driver.wait(until.elementIsVisible(grid), 10000);
+    await this.driver.sleep(1000);
+  }
 
-  after(async () => {
-    await driver.quit();
-  });
+  async scrollDown() {
+    await this.driver.executeScript(`
+      window.scrollBy({ top: 600, behavior: 'smooth' });
+    `);
+    await this.driver.sleep(2000); // delay for smooth scroll
+  }
 
-  it("Scenario 3: Check sale & stock in category", async () => {
-    await loginPage.open();
-    await loginPage.clickLoginLink();
-    await loginPage.login(config.username, config.password);
+  async checkProducts() {
+    const allProducts = await this.driver.findElements(
+      By.xpath(
+        "//div[@class='thumbnails grid row list-inline']/div[contains(@class,'col-md')]"
+      )
+    );
 
-    // ✅ Navigate to category
-    await productListingPage.openCategory();
-    await productListingPage.scrollPage();
-
-    const allProducts = await productListingPage.getAllProducts();
-
-    let saleCount = 0,
-      saleOutOfStockCount = 0,
-      totalOutOfStockCount = 0;
+    let saleCount = 0;
+    let saleOutOfStockCount = 0;
+    let totalOutOfStockCount = 0;
 
     for (let i = 0; i < allProducts.length; i++) {
       const card = allProducts[i];
@@ -63,17 +66,27 @@ describe("Task 4 - Automation Test Store", function () {
             let addButtons = await card.findElements(
               By.xpath(".//a[@title='Add to Cart']")
             );
+            if (addButtons.length === 0) {
+              addButtons = await card.findElements(
+                By.xpath(
+                  ".//a[contains(@class,'productcart') or contains(@class,'cart') or contains(@title,'Cart')]"
+                )
+              );
+            }
             if (addButtons.length > 0) {
               await addButtons[0].click();
               added = true;
-              await driver.sleep(400); // ⏳ kam delay after add
+              await this.driver.sleep(1000); // delay after add
             }
           } catch (_) {}
-          console.log(
-            `Product ${i + 1}: On sale ${
-              added ? "and added" : "(button not found)"
-            }`
-          );
+
+          if (added) {
+            console.log(`Product ${i + 1}: On sale, Add to cart.`);
+          } else {
+            console.log(
+              `Product ${i + 1}: On sale, Add to cart (button not found).`
+            );
+          }
         }
       } else {
         if (isOutOfStock) {
@@ -83,11 +96,15 @@ describe("Task 4 - Automation Test Store", function () {
           console.log(`Product ${i + 1}: Not on sale and in stock.`);
         }
       }
+
+      await this.driver.sleep(800);
     }
 
     console.log(`On sale items: ${saleCount}`);
     console.log(`On sale but out of stock: ${saleOutOfStockCount}`);
     console.log(`Total out of stock products: ${totalOutOfStockCount}`);
     console.log(`Total products: ${allProducts.length}`);
-  });
-});
+  }
+}
+
+module.exports = SkincarePage;
