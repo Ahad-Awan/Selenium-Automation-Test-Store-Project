@@ -58,7 +58,7 @@ selenium-task4/
 Install dependencies:
 
 ```bash
-cd selenium-task4
+cd Selenium-Automation-Test-Store-Project
 npm install
 ```
 
